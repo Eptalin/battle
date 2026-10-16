@@ -1,6 +1,8 @@
+from vocations.vocation import Vocation
+
 class Character():
 
-    def __init__(self, name, vocation, level):
+    def __init__(self, name, vocation: Vocation, level):
         self.name     = name
         self.vocation = vocation
         self.level    = level
@@ -14,7 +16,6 @@ class Character():
         self.magic = self.calc_magic()
         self.max_hp = self.calc_max_hp()
         self.techniques = self.get_techniques()
-
 
     def level_up(self):
         self.level += 1

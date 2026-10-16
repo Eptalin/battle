@@ -14,10 +14,10 @@ class Enemy(Character):
 
     def set_level(self, player_level):
         n = random.random()
-        if n < .25 and player_level > 1:
-            return player_level - 1
-        if n > .75:
-            return player_level + 1
         if n > .95:
             return player_level + 2
+        if n > .75:
+            return player_level + 1
+        if n < .25 and player_level > 1:
+            return player_level - 1
         return player_level
