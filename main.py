@@ -1,3 +1,7 @@
+from vocations.vocation import Vocation
+from vocations.player_vocations import VOCATIONS
+from vocations.enemy_vocations import ENEMY_TYPES
+
 def main():
 
     # build Player character
@@ -17,8 +21,6 @@ def main():
             # if win:
             
                 # level up player
-    
-    pass
 
 
 if __name__ == "__main__":
