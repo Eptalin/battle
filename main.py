@@ -7,20 +7,21 @@ def main():
     # build Player character
 
     # loop:
-        # walk a bit -> random chance of battle
+        # walk a bit -> random chance of encounter
+            # talent flag: decrease encounter chance, shorter distance (Mage: Invisibility)
+            # taleng flag: increase encounter chance, longer distance (Fighter: Some kind of charge)
 
-        # if battle: 
+        # if encounter: 
             # randomly select enemy (set level randomly within range around player)
+                # talent flag: chance to decrease enemy level (Ranger: Some kind of debilitation)
 
             # battle
-
-            # if lose:
-
-                # game over
+                # if lose:
+                    # game over -> display distance covered
             
-            # if win:
-            
-                # level up player
+                # if win:
+                    # level up player
+    return
 
 
 if __name__ == "__main__":

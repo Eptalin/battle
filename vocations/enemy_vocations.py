@@ -1,5 +1,3 @@
-from vocations.vocation import Vocation
-
 ENEMY_TYPES = {
     
     "goblin" : { 
