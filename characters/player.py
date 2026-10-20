@@ -1,9 +1,6 @@
-from character import Character
+from characters.character import Character
+
 
 class Player(Character):
     def __init__(self, name, vocation):
-        super().__init__(
-            name     = name, 
-            vocation = vocation, 
-            level    = 1, 
-            )
+        super().__init__(name, vocation, level=1)

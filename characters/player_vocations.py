@@ -15,4 +15,12 @@ VOCATIONS = {
         "magic_multiplier": 1,  
         "hp_multiplier": 10 
     },
+
+    "ranger" : { 
+        "name": "ranger",
+        "vigor_multiplier": 1, 
+        "strength_multiplier": 1,   
+        "magic_multiplier": 1,  
+        "hp_multiplier": 10 
+    },
 }
