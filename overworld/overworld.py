@@ -1,32 +1,39 @@
 import random
 
+from encounters.encounter_types import ENCOUNTERS
 
+
+# A class which controls travel through the overworld.
 class Overworld():
 
-    @staticmethod
-    def travel():
-        encounter_chance = .20
-        distance_unit = 2
-        travelled_distance = 0
-        while True:
-            if random.random() < encounter_chance and travelled_distance > 1:
-                break
-            travelled_distance += distance_unit
-        Overworld.print_travel()
-        return travelled_distance
+    # Constructor
+    def __init__(self):
+        self.distance_travelled = 0
 
-    @staticmethod
-    def print_travel():
-        graphic = r'''
-                                  O 
-                                 /|\/
-        .  .  .  .  .  .  .  .  ./ \
-        ──────┬─────────┬─────────┬─────────┬────
-              7         8         9         10     
-        '''
-        print(graphic)
+    # Repeatedly increase distance travelled until interruped by an encounter.
+    def travel(self):
+        starting_distance = self.distance_travelled
+        encounter_chance = .20  # Percentage chance of an encounter per iteration.
+        distance_unit = 2       # How far we travel each iteration.
+        encounter = None        # No encounter found yet.
+
+        while encounter == None:
+            # Increment the distance the player has travelled.
+            self.distance_travelled += distance_unit
+
+            if random.random() < encounter_chance and self.distance_travelled > 1:
+                # Select an encounter from a list of possible encounters.
+                encounter = random.choice(list(ENCOUNTERS.values()))
+
+        # Print how far we travelled this round.
+        self.print_travel(starting_distance)
+
+        # Inform the game which encounter interrupted our travel.
+        return encounter
 
 
-    @staticmethod
-    def generateEncounter():
-        pass
+    # Print the travel duration to the terminal.
+    def print_travel(self, start):
+        # TODO: Print it more like an animation.
+        print(f"Travelled {self.distance_travelled - start} km")
+

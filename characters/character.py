@@ -23,6 +23,7 @@ class Character():
         self.level += 1
         self.update_charsheet()
         self.hp = self.max_hp
+        print(f"You have levelled up! Now Lvl.{self.level}")
 
 
     def calc_vigor(self):
