@@ -21,7 +21,7 @@ class Overworld():
             # Increment the distance the player has travelled.
             self.distance_travelled += distance_unit
 
-            if random.random() < encounter_chance and self.distance_travelled > 1:
+            if random.random() < encounter_chance:
                 # Select an encounter from a list of possible encounters.
                 encounter = random.choice(list(ENCOUNTERS.values()))
 
@@ -32,7 +32,7 @@ class Overworld():
         return encounter
 
 
-    # Print the travel duration to the terminal.
+    # Print the travel distance to the terminal.
     def print_travel(self, start):
         # TODO: Print it more like an animation.
         print(f"Travelled {self.distance_travelled - start} km")

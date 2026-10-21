@@ -1,8 +1,8 @@
 from encounters.battle import Battle
-from encounters.fairy_fountain import FairyFountain
+from encounters.fountain import Fountain
 
 
 ENCOUNTERS = {
     "battle" : Battle,
-    "fairy_fountain" : FairyFountain,
+    "fountain" : Fountain,
 }

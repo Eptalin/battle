@@ -19,8 +19,9 @@ class Battle(Encounter):
         print(f"You have encountered a Lv.{enemy.level} {enemy.name}!")
 
         # TODO: Implement combat.
-        print("The enemy hit you for 10 damage and fled.")
-        self.player.hp -= 10
+        damage = self.player.max_hp * .1
+        self.player.hp -= damage
+        print(f"The enemy hit you for {damage} damage and fled.")
 
 
     # Randomly set the enemy's level using the player level as a base.
