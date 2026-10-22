@@ -2,14 +2,19 @@ from game import Game
 
 
 def main():
-    # try:
+    # Create gamestate and run.
+    try:
         game = Game()
         game.run()
 
-    # except Exception as e:
-        # print(f"An error occured:\n{e}")
+    # Exit gracefully when user inputs Ctrl^C
+    except KeyboardInterrupt:
+        print("\nQuitting game.")
+        return
 
-    # return
+    # Catch and report errors, while hiding traceback.
+    # except Exception as e:
+    #     print(f"An error occured:\n{e}")
 
 
 if __name__ == "__main__":

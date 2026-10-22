@@ -38,8 +38,7 @@ class CharacterCreator():
     def is_confirmed(self, player):
         # Print character sheet.
         print(f"Name:     {player.name}")
-        print(f"Vocation: {player.vocation.name.capitalize()}")
-        print(f"  - Vigor:    {player.vigor}")
+        print(f"Vocation: {player.vocation['name'].capitalize()}")
         print(f"  - Strength: {player.strength}")
         print(f"  - Magic:    {player.magic}")
         print(f"  - Max HP:   {player.max_hp}")

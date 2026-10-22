@@ -22,5 +22,5 @@ class Game():
             encounter = encounter_type(self.player)
             encounter.run()
             
-        # Print the game over results.
+        # TODO: Print the game over results.
         print(self.overworld.distance_travelled)
