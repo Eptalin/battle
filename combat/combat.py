@@ -34,6 +34,7 @@ class Combat():
         if winner == self.player: 
             # The player levels up when they win.
             winner.level_up()
+            winner.enemies_defeated += 1
 
         return winner
         

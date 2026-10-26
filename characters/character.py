@@ -26,7 +26,7 @@ class Character():
 
     # Increment level and recalculate stats.
     def level_up(self):
-        hp_percentage = self.hp / self.max_hp * 100
+        hp_percentage = self.hp / self.max_hp
         self.level += 1
         self.update_charsheet()
         self.hp = self.max_hp * hp_percentage

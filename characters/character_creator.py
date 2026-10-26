@@ -1,3 +1,5 @@
+from textwrap import dedent
+
 from characters.player import Player
 from characters.player_vocations import VOCATIONS
 from characters.vocation import Vocation
@@ -10,7 +12,7 @@ class CharacterCreator():
     def create(self):
         while True:
             # Prompt for name and vocation.
-            name = input("What's your hero's name? ")
+            name = input("What's your hero's name? ").capitalize()
             vocation = self.choose_vocation() 
 
             # Create a player instance using that info.
@@ -38,11 +40,13 @@ class CharacterCreator():
     # Display current player settings and prompt user for confirmation.
     def is_confirmed(self, player):
         # Print character sheet.
-        print(f"Name:     {player.name}")
-        print(f"Vocation: {player.vocation.name.capitalize()}")
-        print(f"  - Strength: {player.strength}")
-        print(f"  - Magic:    {player.magic}")
-        print(f"  - Max HP:   {player.max_hp}")
+        print(dedent(f"""
+            Name:     {player.name}
+            Vocation: {player.vocation.name.capitalize()}
+            - Strength: {player.strength}
+            - Magic:    {player.magic}
+            - Max HP:   {player.max_hp}
+        """))
 
         # Ask if the user is happy with their choices.
         confirmation = input("\nAre you happy with this selection? (Y/n) ").lower()
