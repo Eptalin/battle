@@ -19,7 +19,7 @@ class Fountain(Encounter):
                 print("The spirit of the fountain emerges from the water and blesses you!")
                 self.player.level_up()
 
-            elif roll < 0.9:
+            elif roll > 0.9:
                 # 10% chance to take 5% damage (1 damage minimum).
                 damage = max(floor(self.player.max_hp * 0.05), 1)
                 self.player.hp -= damage

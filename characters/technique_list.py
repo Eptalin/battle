@@ -1,6 +1,7 @@
 TECHNIQUES = [
     {
         "name": "attack",
+        "type": "attack",
         "vocations": [
             # Player vocations
             "fighter",
@@ -14,6 +15,7 @@ TECHNIQUES = [
 
     {
         "name": "magic attack",
+        "type": "attack",
         "vocations": [
             # Player vocations
             "mage",
@@ -25,12 +27,17 @@ TECHNIQUES = [
         "stat_multiplier": 1,
     },
     
-    # {
-    #     "name": "defend",
-    #     "vocations": [
-    #         "all"
-    #     ],
-    #     "main_stat": None,
-    #     "stat_multiplier": None,
-    # },
+    {
+        "name": "defend",
+        "type": "defend",
+        "vocations": [
+            # Player vocations
+            "fighter",
+            "mage",
+            "ranger",
+            # Enemy vocations
+        ],
+        "main_stat": "n/a",
+        "stat_multiplier": 0,
+    },
 ]

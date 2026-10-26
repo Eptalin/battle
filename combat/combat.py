@@ -1,4 +1,5 @@
 import random
+from math import floor
 
 from characters.enemy import Enemy
 from characters.player import Player
@@ -10,6 +11,7 @@ class Combat():
     def __init__(self, player: Player, enemy: Enemy):
         self.player = player
         self.enemy = enemy
+        self.defending = set()
 
 
     # Control the overall flow of combat.
@@ -52,22 +54,47 @@ class Combat():
         opponent = self.enemy if actor == self.player else self.player
         print(f"It's {actor.name}'s turn.")
 
+        # Reset defend status
+        self.defending.discard(actor)
+
         # Select the technique to use.
         technique = self.choose_technique(actor)
 
-        # Each participant rolls to see if the attack hits.
-        attack_roll = random.randint(1, 20) + getattr(actor, technique.main_stat)
-        defence_roll = random.randint(1,20) * getattr(opponent, technique.main_stat)
+        match technique.type:
 
-        if attack_roll < defence_roll:
-            # End the actor's turn if the attack fails.
-            print(f"{actor.name}'s attack failed to connect.")
-            return
+            case "attack":
+                # Use the technique's main stat.
+                attack_stat = getattr(actor, technique.main_stat)
+                defence_stat = getattr(opponent, technique.main_stat)
 
-        # Deal one D6 + strength stat damage.
-        damage = random.randint(1, 6) + actor.strength
-        opponent.hp -= damage
-        print(f"{actor.name} deals {damage} damage to {opponent.name}!")
+                # Each participant rolls to see if the attack hits.
+                attack_roll = random.randint(1, 20) + attack_stat
+                defence_roll = random.randint(1,20) + defence_stat
+
+                if attack_roll < defence_roll:
+                    # End the actor's turn if the attack fails.
+                    print(f"{actor.name}'s attack failed to connect.")
+                    return
+
+                # Deal one D6 + main stat damage.
+                damage = random.randint(1, 6) + attack_stat
+
+                # Halve damage if opponent is defending.
+                if opponent in self.defending:
+                    damage //= 2
+                    print(f"{opponent.name} braces for the attack.")
+                
+                opponent.hp -= damage
+                print(f"{actor.name} deals {damage} damage to {opponent.name}!")
+ 
+            case "defend":
+                # Add character to the list of defending characters.
+                self.defending.add(actor)
+
+                # Recover 15% of max hp (min 1hp)
+                heal = max(floor(actor.max_hp * .15), 1)
+                actor.hp += heal
+                print(f"{actor.name} takes a defensive posture and rests for a moment. \n{actor.name} recovers {heal}hp.")
 
 
     # Print the results of the battle.
