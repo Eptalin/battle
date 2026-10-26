@@ -1,5 +1,6 @@
 from characters.player import Player
 from characters.player_vocations import VOCATIONS
+from characters.vocation import Vocation
 
 
 # Guide users to create a character.
@@ -31,14 +32,14 @@ class CharacterCreator():
 
             # Validate user input
             if selection in VOCATIONS:
-                return VOCATIONS[selection]
+                return Vocation(VOCATIONS[selection])
 
 
     # Display current player settings and prompt user for confirmation.
     def is_confirmed(self, player):
         # Print character sheet.
         print(f"Name:     {player.name}")
-        print(f"Vocation: {player.vocation['name'].capitalize()}")
+        print(f"Vocation: {player.vocation.name.capitalize()}")
         print(f"  - Strength: {player.strength}")
         print(f"  - Magic:    {player.magic}")
         print(f"  - Max HP:   {player.max_hp}")

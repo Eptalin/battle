@@ -1,6 +1,7 @@
 import random
 
 from characters.enemy import Enemy 
+from characters.vocation import Vocation
 
 
 # Generate an enemy object.
@@ -9,7 +10,7 @@ def generate_enemy(enemy_pool, player_level):
     enemy_type = random.choice(enemy_pool)
     enemy_level = set_enemy_level(player_level)
 
-    return Enemy(enemy_type, enemy_level)
+    return Enemy(Vocation(enemy_type), enemy_level)
 
 
 # Randomly set the enemy's level using the player level as a base.

@@ -2,6 +2,7 @@ from game import Game
 
 
 def main():
+    
     # Create gamestate and run.
     try:
         game = Game()

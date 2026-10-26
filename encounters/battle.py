@@ -2,6 +2,7 @@ from math import floor
 
 from characters.enemy_generator import generate_enemy
 from characters.enemy_types import ENEMY_TYPES
+from combat.combat import Combat
 from encounters.encounter import Encounter
 
 
@@ -14,7 +15,6 @@ class Battle(Encounter):
         # Print what we encountered.
         print(f"You have encountered a Lv.{enemy.level} {enemy.name}!")
 
-        # TODO: Implement combat.
-        damage = max(floor(self.player.max_hp * .1), 1) # 10% damage (at least 1 damage)
-        self.player.hp -= damage
-        print(f"The enemy hit you for {damage} damage and fled.")
+        # Initiate combat.
+        combat = Combat(self.player, enemy)
+        combat.run()
