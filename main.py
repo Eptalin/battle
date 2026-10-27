@@ -1,5 +1,5 @@
 from game import Game
-
+from ui import ui
 
 def main():
     
@@ -10,7 +10,10 @@ def main():
 
     # Exit gracefully when user inputs Ctrl^C
     except KeyboardInterrupt:
-        print("\nQuitting game.")
+        if game.overworld and game.player:
+            ui.game_over(game.overworld, game.player)
+        else:
+            ui.game_over()
         return
 
     # Catch and report errors, while hiding traceback.

@@ -1,7 +1,6 @@
-from textwrap import dedent
-
 from characters.character_creator import CharacterCreator
 from overworld.overworld import Overworld
+from ui import ui
 
 
 class Game():
@@ -25,17 +24,5 @@ class Game():
             encounter.run()
             
         # Print the game over results.
-        self.game_over()
+        ui.game_over(self.overworld, self.player)
 
-
-    def game_over(self):
-        print(dedent(f"""
-            {self.player.name} has fallen...
-
-            ========= Results =========
-            Distance travelled: {self.overworld.distance_travelled}km
-            Enemies defeated:   {self.player.enemies_defeated}
-            ===========================
-
-            Thank you for playing!
-        """))
