@@ -3,6 +3,7 @@ from textwrap import dedent
 from characters.player import Player
 from characters.player_vocations import VOCATIONS
 from characters.vocation import Vocation
+from ui import ui
 
 
 # Guide users to create a character.
@@ -10,10 +11,15 @@ class CharacterCreator():
 
     # Control the character creation flow.
     def create(self):
+        ui.set_header("Character Creation")
         while True:
             # Prompt for name and vocation.
-            name = input("What's your hero's name? ").capitalize()
-            vocation = self.choose_vocation() 
+            name = ui.prompt("What's your hero's name? ").title()
+            vocation = ui.choice(
+                 "Please select your vocation: ", 
+                 [vocation['name'].capitalize() for vocation in VOCATIONS.values()], 
+                 self.validate_vocation
+            )
 
             # Create a player instance using that info.
             player = Player(name, vocation)
@@ -24,32 +30,26 @@ class CharacterCreator():
 
 
     # Allow the user to select a vocation from a list.
-    def choose_vocation(self):
-        while True:
-            # Prompt for a vocation, and display a list of options.
-            print("Please select your vocation:")
-            for vocation in VOCATIONS.values():
-                print(f" - {vocation['name'].capitalize()}")
-            selection = input("Selection: ").lower()
-
-            # Validate user input
-            if selection in VOCATIONS:
-                return Vocation(VOCATIONS[selection])
+    def validate_vocation(self, selection):
+        if selection in VOCATIONS:
+            return Vocation(VOCATIONS[selection])
+        return None
 
 
     # Display current player settings and prompt user for confirmation.
     def is_confirmed(self, player):
-        # Print character sheet.
-        print(dedent(f"""
-            Name:     {player.name}
-            Vocation: {player.vocation.name.capitalize()}
+        # Print character sheet and prompt user to confirm.
+        confirmation = ui.prompt(dedent(f"""\
+            Are you happy with these choices?
+            
+            Name:       {player.name}
+            Vocation:   {player.vocation.name.capitalize()}
             - Strength: {player.strength}
             - Magic:    {player.magic}
             - Max HP:   {player.max_hp}
-        """))
 
-        # Ask if the user is happy with their choices.
-        confirmation = input("\nAre you happy with this selection? (Y/n) ").lower()
+            (Y/n): """
+        )).lower()
 
         if confirmation in ["y", "yes"]:
                 return True

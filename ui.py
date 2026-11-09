@@ -1,6 +1,6 @@
 import os
 import subprocess
-from textwrap import dedent
+from textwrap import indent
 from time import sleep
 
 # Controls how information is displayed to the terminal.
@@ -11,35 +11,90 @@ class UI():
             self.header = None
 
 
-    # Report game over results.
-    def game_over(self, overworld=None, player=None):
-        # Use game state information if it exists.
-        distance = overworld.distance_travelled    if overworld else 0
-        enemies_defeated = player.enemies_defeated if player    else 0
-        name = f"{player.name}'s"                  if player    else "Your"
 
-        # Print the results template.
-        print(dedent(f"""
-            {name} journey has ended...
+    # Prompt the user for input (optionally, validate it).
+    def prompt(self, prompt, validate=lambda x:x, noun="input"):
+        user_input = None
+        while user_input is None:
+            self.clear()
 
-            ========= Results =========
-            Distance travelled: {distance}km
-            Enemies defeated:   {enemies_defeated}
-            ===========================
-
-            Thank you for playing!
-        """))
+            # Display the prompt.
+            user_input = validate(input(prompt))
+            
+            # Reprompt if the input was invalid.
+            if user_input is None:
+                self.invalid_input(noun)
+        return user_input
 
 
-    # Erase the terminal.
+
+    # Prompt user to select from a list of options (optionally, validate it).
+    def choice(self, prompt, options, validate=lambda x:x, noun="selection"):
+        choice = None
+        while choice is None:
+            self.clear()
+
+            # Display the prompt.
+            self.print(prompt, 0.2)
+
+            # Display the options.
+            for option in options:
+                print(f"- {option.title()}")
+                self.pause(0.2)
+
+            # Make sure the input is in the list of valid options.
+            choice = validate(input("Selection: ").lower())
+
+            # Reprompt if the input was invalid.
+            if choice is None:
+                self.invalid_input(noun)
+        return choice
+
+
+
+    # Report the user made an invalid choice (can replace noun)
+    def invalid_input(self, noun):
+        self.clear()
+        print(f"Invalid {noun}.")
+        self.pause(1.5)
+
+
+
+    # Display a message in the terminal.
+    def print(self, message, pause=0, end="\n"):
+        print(message, end=end, flush=True)
+        self.pause(pause)
+
+
+
+    # Clear the terminal and display the header.
     def clear(self):
-        subprocess.run("cls" if os.name == "nt" else "clear")
+        self.clear_full()
+        if self.header is not None:
+            print(self.header)
 
 
-    # Pause for n seconds.
+    
+    # Fully clear the terminal.
+    def clear_full(self):
+        subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+
+
+
+    # Pause the terminal output by n seconds.
     def pause(self, seconds=1):
         sleep(seconds)
 
 
-# Create a UI object classes can import.
+
+    # Store a header for reuse.
+    def set_header(self, label):
+        bar = "=" * 90
+        label = indent(label, " " * 8)
+        self.header = f"\n{bar}\n\n{label}\n\n{bar}\n"
+        self.clear()
+
+
+
+# Create a single UI object to be shared throughout the program.
 ui = UI()

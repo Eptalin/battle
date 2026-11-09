@@ -10,7 +10,11 @@ class VendingMachine():
 
     def run(self):
         # Prompt the user to select an item from a list of options.
-        item = ui.choice("Select item: ", [item.name for item in self.items.values()], self.validate_item)
+        item = ui.choice(
+            "Select item: ", 
+            [item.name for item in self.items.values()], 
+            self.validate_item
+        )
         price = item.price
         change = self.process_payment(item.name, price)
         self.end_transaction(item.name, change)
@@ -27,15 +31,15 @@ class VendingMachine():
 
             # Subtract the coin from the amount owed.
             owed -= coin
-            ui.show_message("Coin accepted.", 0.5)
+            ui.print("Coin accepted.", 0.5)
 
         return owed
 
 
     def end_transaction(self, name, change):
         ui.set_header(f"Item: {name.capitalize()}    Outstanding: 0")
-        ui.show_message(f"Change: {abs(change)}", 0.5)
-        ui.show_message("Transaction complete!", 2)
+        ui.print(f"Change: {abs(change)}", 0.5)
+        ui.print("Transaction complete!", 2)
 
 
     # Ensure user input a valid item.

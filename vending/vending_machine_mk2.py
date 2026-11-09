@@ -26,7 +26,7 @@ class VendingMachineMk2(VendingMachine):
 
     def no_internet(self, name, price):
         ui.clear()
-        ui.show_message("Can't connect to server. Please pay by cash.")
+        ui.print("Can't connect to server. Please pay by cash.")
         super().process_payment(name, price)
 
 

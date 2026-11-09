@@ -12,24 +12,30 @@ class UI():
         self.header = None
 
 
+    # Prompt the user for input (optionally, validate it).
     def prompt(self, prompt, validate=lambda x:x, noun="input"):
         user_input = None
         while user_input is None:
             self.clear()
+
+            # Display the prompt.
             user_input = validate(input(prompt))
+            
+            # Reprompt if the input was invalid.
             if user_input is None:
                 self.invalid_input(noun)
         return user_input
 
 
-    # Prompt user to select from a list of options.
+
+    # Prompt user to select from a list of options (optionally, validate it).
     def choice(self, prompt, options, validate=lambda x:x, noun="selection"):
         choice = None
         while choice is None:
             self.clear()
 
             # Display the prompt.
-            self.show_message(prompt, 0.2)
+            self.print(prompt, 0.2)
 
             # Display the options.
             for option in options:
@@ -45,16 +51,20 @@ class UI():
         return choice
 
 
+
+    # Report the user made an invalid choice (can replace noun)
     def invalid_input(self, noun):
         self.clear()
         print(f"Invalid {noun}.")
         self.pause(2)
 
 
+
     # Display a message in the terminal.
-    def show_message(self, message, pause=0):
+    def print(self, message, pause=0):
         print(message)
         self.pause(pause)
+
 
 
     # Clear the terminal and display the header.
@@ -63,15 +73,18 @@ class UI():
         if self.header is not None:
             print(self.header)
 
+
     
     # Fully clear the terminal.
     def clear_full(self):
         subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 
+
     # Pause the terminal output by n seconds.
     def pause(self, seconds=1):
         sleep(seconds)
+
 
 
     # Store a header for reuse.
@@ -84,6 +97,7 @@ class UI():
         =============================================================================================
         """)
         self.clear()
+
 
 
 # Create a single UI object to be shared throughout the program.

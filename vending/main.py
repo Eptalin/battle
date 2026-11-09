@@ -16,17 +16,22 @@ VALID_COINS = [5, 10, 20, 50, 100, 200]
 
 def main():
     ui.set_header("Machine Selection")
+    
     machines = ["Vending Machine Mk1", "Vending Machine Mk2", "Coffee Machine"]
     machine = ui.choice("Select a machine: ", machines, validate_machine)
+    
     if machine == "mk1":
          machine = VendingMachine(ITEMS, VALID_COINS)
          ui.set_header("Vending Mahchine Mk.1")
+    
     if machine == "mk2":
          machine = VendingMachineMk2(ITEMS, VALID_COINS)
          ui.set_header("Vending Mahchine Mk.2")
+    
     if machine == "coffee":
          machine = CoffeeMachine()
          ui.set_header("Coffee Machine")
+    
     machine.run()
 
 

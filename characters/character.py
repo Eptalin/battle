@@ -29,7 +29,7 @@ class Character():
         hp_percentage = self.hp / self.max_hp
         self.level += 1
         self.update_charsheet()
-        self.hp = self.max_hp * hp_percentage
+        self.hp = floor(self.max_hp * hp_percentage)
         print(f"You have levelled up! Now Lvl.{self.level}")
 
 
