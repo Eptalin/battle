@@ -29,11 +29,13 @@ class CharacterCreator():
                 return player
 
 
+
     # Allow the user to select a vocation from a list.
     def validate_vocation(self, selection):
         if selection in VOCATIONS:
             return Vocation(VOCATIONS[selection])
         return None
+
 
 
     # Display current player settings and prompt user for confirmation.

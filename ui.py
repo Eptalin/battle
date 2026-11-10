@@ -35,7 +35,7 @@ class UI():
             self.clear()
 
             # Display the prompt.
-            self.print(prompt, 0.2)
+            self.print(prompt, 0.2, "\n\n")
 
             # Display the options.
             for option in options:
@@ -43,7 +43,7 @@ class UI():
                 self.pause(0.2)
 
             # Make sure the input is in the list of valid options.
-            choice = validate(input("Selection: ").lower())
+            choice = validate(input("\nSelection: ").lower())
 
             # Reprompt if the input was invalid.
             if choice is None:

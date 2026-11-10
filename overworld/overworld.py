@@ -20,7 +20,7 @@ class Overworld():
         distance_unit = 2       # How far we travel each iteration.
         encounter = None        # No encounter found yet.
 
-        ui.set_header("Overworld")
+        ui.set_header("Overworld - Travelling")
 
         while encounter == None:
             # Increment the distance the player has travelled.
@@ -43,5 +43,5 @@ class Overworld():
         distance = self.distance_travelled - start
         for _ in range(distance):
             ui.print(".  ", 0.5, "")
-        ui.print("!!!", end="")
-        ui.print(f"Travelled {distance} km", 1)
+        ui.print("!!!", 0.5, "\n\n")
+        ui.print(f"Travelled {distance} km", 1.5)
