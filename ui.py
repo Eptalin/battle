@@ -23,7 +23,8 @@ class UI():
             
             # Reprompt if the input was invalid.
             if user_input is None:
-                self.invalid_input(noun)
+                self.clear()
+                self.print(f"Invalid {noun}", 1.5)
         return user_input
 
 
@@ -47,16 +48,9 @@ class UI():
 
             # Reprompt if the input was invalid.
             if choice is None:
-                self.invalid_input(noun)
+                self.clear()
+                self.print(f"Invalid {noun}", 1.5)
         return choice
-
-
-
-    # Report the user made an invalid choice (can replace noun)
-    def invalid_input(self, noun):
-        self.clear()
-        print(f"Invalid {noun}.")
-        self.pause(1.5)
 
 
 

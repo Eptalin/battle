@@ -14,8 +14,8 @@ def main():
         return
 
     # Catch and report errors, while hiding traceback.
-    # except Exception as e:
-    #     print(f"An error occured:\n{e}")
+    except Exception as e:
+        print(f"An error occured:\n{e}")
 
 
 if __name__ == "__main__":
